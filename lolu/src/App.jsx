@@ -52,7 +52,10 @@ function App() {
   const [categoriaActiva, setCategoriaActiva] =
     useState("parejas");
 
-  const [carrito, setCarrito] = useState(0);
+  const [carrito, setCarrito] = useState([]);
+
+  const [mostrarCarrito, setMostrarCarrito] =
+  useState(false);
 
   return (
     <div className="app">
@@ -66,10 +69,77 @@ function App() {
   <a href="#">Catálogo</a>
   <a href="#">Contacto</a>
 
- <div className="cart">
-  🛒 <span>({carrito})</span>
+ <div
+  className="cart"
+  onClick={() => setMostrarCarrito(!mostrarCarrito)}
+>
+  🛒 <span>({carrito.length})</span>
 </div>
+
 </div>
+
+{mostrarCarrito && (
+  <div
+    className="overlay"
+    onClick={() => setMostrarCarrito(false)}
+  />
+)}
+
+{mostrarCarrito && (
+  <div className="carrito-panel">
+  <div className="carrito-header">
+  <h3>Tu carrito</h3>
+
+  <button
+    className="cerrar-carrito"
+    onClick={() => setMostrarCarrito(false)}
+  >
+    ✕
+  </button>
+</div>
+
+  {carrito.length === 0 ? (
+  <p>No hay productos todavía</p>
+) : (
+  carrito.map((producto, index) => (
+
+   <div key={index} className="item-carrito">
+
+  <img
+    src={producto.imagen}
+    alt={producto.nombre}
+  />
+
+  <div className="item-info">
+
+    <h4>{producto.nombre}</h4>
+
+    <p>{producto.precio}</p>
+
+    <button>
+      🗑️ Eliminar
+    </button>
+
+  </div>
+
+</div>
+
+  ))
+)}
+
+<hr />
+
+<h2 className="total-carrito">
+  Total: $23.500
+</h2>
+
+<button className="btn-finalizar">
+  Finalizar Pedido
+</button>
+
+  </div>
+
+)}
 
       </nav>
 
@@ -79,7 +149,7 @@ function App() {
 
     <p>
       Detalles únicos y personalizados para sorprender
-      a las personas que más querés.
+      a la persona que más querés.
     </p>
 
     <button>Ver Catálogo</button>
@@ -93,37 +163,45 @@ function App() {
   </div>
 </section>
 
-      <section className="categorias">
-        <h3>Categorías</h3>
+<section className="categorias">
+  <h3>Categorías</h3>
 
-      <div
-  className="card"
-  onClick={() => setCategoriaActiva("parejas")}
->
-  💝 Parejas
-</div>
+  <div className="categorias-grid">
 
-<div
-  className="card"
-  onClick={() => setCategoriaActiva("sorpresas")}
->
-  🎁 Sorpresas
-</div>
+    <div
+      className="card"
+      onClick={() => setCategoriaActiva("parejas")}
+    >
+      <span>💝</span>
+      <span>Parejas</span>
+    </div>
 
-<div
-  className="card"
-  onClick={() => setCategoriaActiva("peluches")}
->
-  🧸 Peluches
-</div>
+    <div
+      className="card"
+      onClick={() => setCategoriaActiva("sorpresas")}
+    >
+      <span>🎁</span>
+      <span>Sorpresas</span>
+    </div>
 
-<div
-  className="card"
-  onClick={() => setCategoriaActiva("ramos")}
->
-  🌸 Ramos
-</div>
-      </section>
+    <div
+      className="card"
+      onClick={() => setCategoriaActiva("peluches")}
+    >
+      <span>🧸</span>
+      <span>Peluches</span>
+    </div>
+
+    <div
+      className="card"
+      onClick={() => setCategoriaActiva("ramos")}
+    >
+      <span>🌸</span>
+      <span>Ramos</span>
+    </div>
+
+  </div>
+</section>
 
       <section className="destacados">
   <h3>Productos Destacados</h3>
@@ -146,7 +224,9 @@ function App() {
         </p>
 
 <button
-  onClick={() => setCarrito(carrito + 1)}
+  onClick={() =>
+  setCarrito([...carrito, producto])
+}
 >
   Comprar
 </button>
