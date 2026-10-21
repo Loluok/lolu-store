@@ -274,6 +274,13 @@ body {
   animation: abrirCarrito .3s ease;
 }
 
+.carrito-vacio {
+  font-size: 1rem;
+  text-align: center;
+  color: #6d6d6d;
+  margin: 20px 0;
+}
+
 .btn-finalizar {
   width: 100%;
   padding: 14px;
@@ -285,7 +292,13 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
+
+
 
 .btn-finalizar:hover {
   background: #B16F70;

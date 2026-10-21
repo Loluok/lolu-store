@@ -54,6 +54,29 @@ function App() {
 
   const [carrito, setCarrito] = useState([]);
 
+  const total = carrito.reduce((acum, producto) => {
+
+  const precio = Number(
+    producto.precio
+      .replace("$", "")
+      .replace(".", "")
+  );
+
+  return acum + precio;
+
+}, 0);
+
+  const mensajeWhatsApp = `
+  Hola! <3
+  Quiero comprar:
+
+  ${carrito.map(
+  (producto) => `- ${producto.nombre}`
+  ).join("\n")}
+
+  Total: $${total.toLocaleString("es-AR")}`;
+    
+
   const [mostrarCarrito, setMostrarCarrito] =
   useState(false);
 
@@ -99,7 +122,11 @@ function App() {
 </div>
 
   {carrito.length === 0 ? (
-  <p>No hay productos todavía</p>
+
+ <p className="carrito-vacio">
+ Todavía no agregaste un regalo 💜
+</p>
+
 ) : (
   carrito.map((producto, index) => (
 
@@ -116,9 +143,15 @@ function App() {
 
     <p>{producto.precio}</p>
 
-    <button>
-      🗑️ Eliminar
-    </button>
+  <button
+  onClick={() =>
+    setCarrito(
+      carrito.filter((_, i) => i !== index)
+    )
+  }
+>
+  🗑️ Eliminar
+</button>
 
   </div>
 
@@ -130,12 +163,21 @@ function App() {
 <hr />
 
 <h2 className="total-carrito">
-  Total: $23.500
+  Total: $
+  {total.toLocaleString("es-AR")}
 </h2>
 
-<button className="btn-finalizar">
+
+<a
+  className="btn-finalizar"
+  href={`https://wa.me/5491160328221?text=${encodeURIComponent(
+    mensajeWhatsApp
+  )}`}
+  target="_blank"
+  rel="noreferrer"
+>
   Finalizar Pedido
-</button>
+</a>
 
   </div>
 
