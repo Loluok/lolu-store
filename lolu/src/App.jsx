@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { productos } from "./data/productos";
 import "./App.css";
+import ProductoCard from "./components/ProductoCard";
+import InfoBar from "./components/InfoBar";
+
 
 function App() {
 
@@ -219,9 +222,9 @@ const tieneObservacion =
 
       </nav>
 
-      <div className="info-bar">
-  {mensajesInfo[mensajeActivo]}
-</div>
+<InfoBar
+  mensaje={mensajesInfo[mensajeActivo]}
+/>
 
       <section className="hero">
   <div className="hero-text">
@@ -294,33 +297,19 @@ const tieneObservacion =
   <h3>Productos Destacados</h3>
 
   <div className="cards">
+  
 
-    {productos[categoriaActiva].map((producto, index) => (
+{productos[categoriaActiva].map((producto, index) => (
 
-      <div className="producto" key={index}>
+  <ProductoCard
+    key={index}
+    producto={producto}
+    agregarAlCarrito={(producto) =>
+      setCarrito([...carrito, producto])
+    }
+  />
 
-        <img
-          src={producto.imagen}
-          alt={producto.nombre}
-        />
-
-        <h4>{producto.nombre}</h4>
-
-        <p className="precio">
-          {producto.precio}
-        </p>
-
-<button
-  onClick={() =>
-  setCarrito([...carrito, producto])
-}
->
-  Comprar
-</button>
-
-      </div>
-
-    ))}
+))}
 
   </div>
 

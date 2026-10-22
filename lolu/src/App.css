@@ -18,15 +18,14 @@ body {
 
 
 .info-bar {
-  background:#f8dede;;
+  background: #f8dede;
   color: #7A5252;
   text-align: center;
   padding: 10px;
   font-size: .95rem;
   font-weight: 500;
-  transition: .1s;
+  animation: aparecer 0.5s ease;
 }
-
 .navbar {
   display: flex;
   align-items: center;
@@ -456,9 +455,18 @@ body {
     transform: translateX(100%);
     opacity: 0;
   }
-
   to {
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+
 }
