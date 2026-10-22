@@ -5,6 +5,7 @@ import ProductoCard from "./components/ProductoCard";
 import InfoBar from "./components/InfoBar";
 import Carrito from "./components/Carrito";
 import CategoriaCard from "./components/CategoriaCard";
+import logoLolu from "./assets/logo-lolu.png";
 
 function App() {
 
@@ -232,17 +233,46 @@ const tieneObservacion =
 
 </section>
 
-<footer id="contacto" className="footer">
+<footer
+  id="contacto"
+  className="footer"
+>
 
-  <h3>LOLU ♡</h3>
+  <div className="footer-logo">
 
-  <p>📍 Palermo, CABA</p>
+  <a href="#">
+  <img
+    src={logoLolu}
+    alt="LOLU"
+    className="logo-footer"
+  />
+</a>
 
-  <p>🚚 Envíos por Correo Argentino</p>
+    <h3>LOLU ♡</h3>
 
-  <p>📱 WhatsApp</p>
+</div>
+  
+  <div className="footer-info">
+    <h4>Información</h4>
 
-  <p>💌 Instagram</p>
+    <p>📍 Palermo, CABA</p>
+
+    <p>🚚 Envíos por Correo Argentino</p>
+  </div>
+
+  <div className="footer-contacto">
+    <h4>Contacto</h4>
+
+   <a href="https://wa.me/5491160328221">
+  📱 WhatsApp
+</a>
+
+  <a href="https://instagram.com/locommenge">
+  💗 Instagram
+</a>
+
+    <p>✉️ Correo</p>
+  </div>
 
 </footer>
 
