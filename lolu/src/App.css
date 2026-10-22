@@ -342,6 +342,21 @@ html {
   background: #B16F70;
 }
 
+.btn-eliminar {
+  margin-top: 10px;
+  border: none;
+  background: #e8b4b8;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-eliminar:hover {
+  background: #d9989d;
+}
+
 .cerrar-carrito:hover{
   transform:scale(1.1);
 }
