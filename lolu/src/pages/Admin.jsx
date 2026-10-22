@@ -1,14 +1,48 @@
 import logoLolu from "../assets/logo-lolu.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Admin() {
 
     const [nombre, setNombre] = useState("");
 const [precio, setPrecio] = useState("");
 const [categoria, setCategoria] = useState("Parejas");
-const [productos, setProductos] = useState([]);
+const [productos, setProductos] = useState(() => {
+
+  const guardados =
+    localStorage.getItem("productos");
+
+  return guardados
+    ? JSON.parse(guardados)
+    : [];
+
+});
 const [editandoIndex, setEditandoIndex] = useState(null);
 const [imagen, setImagen] = useState("");
+
+useEffect(() => {
+
+  const productosGuardados =
+    localStorage.getItem("productos");
+
+  if (productosGuardados) {
+
+    setProductos(
+      JSON.parse(productosGuardados)
+    );
+
+  }
+
+}, []);
+
+useEffect(() => {
+
+
+  localStorage.setItem(
+    "productos",
+    JSON.stringify(productos)
+  );
+
+}, [productos]);
 
   return (
     <div className="admin">
@@ -100,6 +134,7 @@ if (editandoIndex !== null) {
   setEditandoIndex(null);
 
 } else {
+
 
   setProductos([
     ...productos,

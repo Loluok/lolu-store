@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { productos } from "./data/productos";
 import "./App.css";
 import ProductoCard from "./components/ProductoCard";
 import InfoBar from "./components/InfoBar";
@@ -14,6 +13,17 @@ function App() {
 
   const [carrito, setCarrito] = useState([]);
 
+  const [productos, setProductos] = useState(() => {
+
+  const guardados =
+    localStorage.getItem("productos");
+
+  return guardados
+    ? JSON.parse(guardados)
+    : [];
+
+});
+
   const [observacion, setObservacion] = useState("");
 
   const [mensajeActivo, setMensajeActivo] =
@@ -26,6 +36,7 @@ function App() {
       .replace("$", "")
       .replace(".", "")
   );
+
 
   return acum + precio;
 
@@ -77,9 +88,16 @@ useEffect(() => {
 
 const tieneProductos = carrito.length > 0;
 
+
 const tieneObservacion =
   observacion.trim() !== "";
 
+const productosFiltrados =
+  productos.filter(
+    (producto) =>
+      producto.categoria.toLowerCase() ===
+      categoriaActiva
+  );
 
   return (
     <div className="app">
@@ -217,7 +235,7 @@ const tieneObservacion =
   <div className="cards">
   
 
-{productos[categoriaActiva].map((producto, index) => (
+{productosFiltrados.map((producto, index) => (
 
   <ProductoCard
     key={index}
