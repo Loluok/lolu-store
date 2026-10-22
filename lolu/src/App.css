@@ -10,6 +10,16 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.info-bar {
+  background:#f8dede;;
+  color: #7A5252;
+  text-align: center;
+  padding: 10px;
+  font-size: .95rem;
+  font-weight: 500;
+  transition: .1s;
+}
+
 .navbar {
   display: flex;
   align-items: center;
@@ -298,8 +308,6 @@ body {
   text-decoration: none;
 }
 
-
-
 .btn-finalizar:hover {
   background: #B16F70;
 }
@@ -372,14 +380,51 @@ body {
   z-index: 1999;
 }
 
-@media (min-width: 768px) {
-  .cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.observaciones {
+  width: 80%;
+  min-height: 90px;
+  padding: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e5d7d7;
+  border-radius: 12px;
+  resize: vertical;
+  font-family: inherit;
+  background: #fff;
+  color: #4f4f4f;
+}
+
+.observaciones-label{
+  display:block;
+  margin-top:20px;
+  margin-bottom:8px;
+  color:#7A5252;
+  font-weight:600;
+  font-size: 1.2rem;
+}
+
+.observaciones::placeholder {
+  color: #8f8f8f;
 }
 
 .carrito-panel {
   animation: abrirCarrito .35s ease;
+}
+
+.card.activa {
+  background: #F4C7C3;
+  border: 2px solid #C78283;
+  transform: translateY(-3px);
+}
+
+.card.activa span:first-child {
+  transform: scale(1.1);
+}
+
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @keyframes abrirCarrito {

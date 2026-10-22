@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const productos = {
@@ -54,6 +54,11 @@ function App() {
 
   const [carrito, setCarrito] = useState([]);
 
+  const [observacion, setObservacion] = useState("");
+
+  const [mensajeActivo, setMensajeActivo] =
+  useState(0);
+
   const total = carrito.reduce((acum, producto) => {
 
   const precio = Number(
@@ -66,23 +71,64 @@ function App() {
 
 }, 0);
 
-  const mensajeWhatsApp = `
-  Hola! <3
-  Quiero comprar:
+const mensajeWhatsApp = `
+*Hola! <3*
 
-  ${carrito.map(
-  (producto) => `- ${producto.nombre}`
-  ).join("\n")}
+Quiero comprar:
 
-  Total: $${total.toLocaleString("es-AR")}`;
-    
+ᨳଓ ${carrito.map(
+  (producto) => producto.nombre
+).join("\nᨳଓ ")}
+
+. ݁⋆ ۶ৎ ݁˖ .
+
+*Observaciones:*
+
+${observacion || "Sin observaciones"}
+
+≽^• ˕ • ྀི≼
+
+*Total:* $${total.toLocaleString("es-AR")}
+`; 
+
+const mensajesInfo = [
+  "🚚 Envíos a todo el país por Correo Argentino",
+  "📍 Retiro por Palermo, CABA",
+  "🎀 Transformamos regalos en recuerdos",
+  "💌 Pequeños detalles, grandes emociones"
+];
+
+useEffect(() => {
+
+  const intervalo = setInterval(() => {
+
+    setMensajeActivo((prev) =>
+      (prev + 1) % mensajesInfo.length
+    );
+
+  }, 5000);
+
+  return () => clearInterval(intervalo);
+
+}, []);
 
   const [mostrarCarrito, setMostrarCarrito] =
   useState(false);
 
+const tieneProductos = carrito.length > 0;
+
+const tieneObservacion =
+  observacion.trim() !== "";
+
+
   return (
     <div className="app">
+
       <nav className="navbar">
+
+        <div className="info-bar">
+  {mensajesInfo[mensajeActivo]}
+</div>
         <h1>
   LOLU <span>✧ ೃ༄*ੈ✩</span>
 </h1>
@@ -160,6 +206,17 @@ function App() {
   ))
 )}
 
+<label className="observaciones-label">
+ ᭪༊ ¿Querés contarnos algo?
+</label>
+
+<textarea
+  className="observaciones"
+  placeholder="Ej: agregar tarjeta, envío o retiro, color favorito..."
+  value={observacion}
+  onChange={(e) => setObservacion(e.target.value)}
+/>
+
 <hr />
 
 <h2 className="total-carrito">
@@ -168,16 +225,31 @@ function App() {
 </h2>
 
 
-<a
-  className="btn-finalizar"
-  href={`https://wa.me/5491160328221?text=${encodeURIComponent(
-    mensajeWhatsApp
-  )}`}
-  target="_blank"
-  rel="noreferrer"
->
-  Finalizar Pedido
-</a>
+{
+  tieneProductos || tieneObservacion ? (
+
+    <a
+      className="btn-finalizar"
+      href={`https://wa.me/5491160328221?text=${encodeURIComponent(mensajeWhatsApp)}`}
+      target="_blank"
+      rel="noreferrer"
+    >
+      {tieneProductos
+        ? "Finalizar Pedido"
+        : "Enviar consulta ݁✮⋆"}
+    </a>
+
+  ) : (
+
+    <button
+      className="btn-finalizar btn-disabled"
+      disabled
+    >
+      Agregá un producto o escribinos
+    </button>
+
+  )
+}
 
   </div>
 
@@ -211,33 +283,40 @@ function App() {
   <div className="categorias-grid">
 
     <div
-      className="card"
-      onClick={() => setCategoriaActiva("parejas")}
-    >
+  className={`card ${
+    categoriaActiva === "parejas" ? "activa" : ""
+  }`}
+  onClick={() => setCategoriaActiva("parejas")}
+>
       <span>💝</span>
       <span>Parejas</span>
     </div>
-
-    <div
-      className="card"
-      onClick={() => setCategoriaActiva("sorpresas")}
-    >
+<div
+  className={`card ${
+    categoriaActiva === "sorpresas" ? "activa" : ""
+  }`}
+  onClick={() => setCategoriaActiva("sorpresas")}
+>
       <span>🎁</span>
       <span>Sorpresas</span>
     </div>
 
     <div
-      className="card"
-      onClick={() => setCategoriaActiva("peluches")}
-    >
+  className={`card ${
+    categoriaActiva === "peluches" ? "activa" : ""
+  }`}
+  onClick={() => setCategoriaActiva("peluches")}
+>
       <span>🧸</span>
       <span>Peluches</span>
     </div>
 
     <div
-      className="card"
-      onClick={() => setCategoriaActiva("ramos")}
-    >
+  className={`card ${
+    categoriaActiva === "ramos" ? "activa" : ""
+  }`}
+  onClick={() => setCategoriaActiva("ramos")}
+>
       <span>🌸</span>
       <span>Ramos</span>
     </div>
