@@ -1,51 +1,6 @@
 import { useState, useEffect } from "react";
+import { productos } from "./data/productos";
 import "./App.css";
-
-const productos = {
-  parejas: [
-    {
-      nombre: "Caja Love",
-      precio: "$15.000",
-      imagen:
-        "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=1000",
-    },
-
-    {
-      nombre: "Carta + Chocolates",
-      precio: "$8.500",
-      imagen:
-        "https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=1000",
-    },
-  ],
-
-  sorpresas: [
-    {
-      nombre: "Caja Sorpresa",
-      precio: "$12.000",
-      imagen:
-        "https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=1000",
-    },
-  ],
-
-  peluches: [
-    {
-      nombre: "Osito Love",
-      precio: "$10.000",
-      imagen:
-        "https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=1000",
-    },
-  ],
-
-  ramos: [
-    {
-      nombre: "Ramo Rosas",
-      precio: "$18.000",
-      imagen:
-        "https://images.unsplash.com/photo-1520763185298-1b434c919102?q=80&w=1000",
-    },
-  ],
-};
-
 
 function App() {
 
@@ -126,9 +81,6 @@ const tieneObservacion =
 
       <nav className="navbar">
 
-        <div className="info-bar">
-  {mensajesInfo[mensajeActivo]}
-</div>
         <h1>
   LOLU <span>✧ ೃ༄*ੈ✩</span>
 </h1>
@@ -156,8 +108,17 @@ const tieneObservacion =
 
 {mostrarCarrito && (
   <div className="carrito-panel">
-  <div className="carrito-header">
-  <h3>Tu carrito</h3>
+<div className="acciones-carrito">
+
+  <button
+    className="vaciar-carrito"
+    onClick={() => {
+      setCarrito([]);
+      setObservacion("");
+    }}
+  >
+    Vaciar
+  </button>
 
   <button
     className="cerrar-carrito"
@@ -165,6 +126,7 @@ const tieneObservacion =
   >
     ✕
   </button>
+
 </div>
 
   {carrito.length === 0 ? (
@@ -256,6 +218,10 @@ const tieneObservacion =
 )}
 
       </nav>
+
+      <div className="info-bar">
+  {mensajesInfo[mensajeActivo]}
+</div>
 
       <section className="hero">
   <div className="hero-text">
