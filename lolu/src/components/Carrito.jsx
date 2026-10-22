@@ -3,7 +3,13 @@ function Carrito({
   setCarrito,
   observacion,
   setObservacion,
+  total,
+  tieneProductos,
+  tieneObservacion,
+  mensajeWhatsApp,
+  setMostrarCarrito,
 }) {
+
   return (
     <div className="carrito-panel">
 
@@ -17,6 +23,13 @@ function Carrito({
     }}
   >
     Vaciar
+  </button>
+
+  <button
+    className="cerrar-carrito"
+    onClick={() => setMostrarCarrito(false)}
+  >
+    ✕
   </button>
 
 </div>
@@ -51,6 +64,53 @@ function Carrito({
   ))
 
 )}
+
+
+<label className="observaciones-label">
+ ᭪༊ ¿Querés contarnos algo?
+</label>
+
+<textarea
+  className="observaciones"
+  placeholder="Ej: agregar tarjeta, envío o retiro, color favorito..."
+  value={observacion}
+  onChange={(e) => setObservacion(e.target.value)}
+/>
+
+<hr />
+
+<h2 className="total-carrito">
+  Total: $
+  {total.toLocaleString("es-AR")}
+</h2>
+
+
+{
+  tieneProductos || tieneObservacion ? (
+
+    <a
+      className="btn-finalizar"
+      href={`https://wa.me/5491160328221?text=${encodeURIComponent(mensajeWhatsApp)}`}
+      target="_blank"
+      rel="noreferrer"
+    >
+      {tieneProductos
+        ? "Finalizar Pedido"
+        : "Enviar consulta ݁✮⋆"}
+    </a>
+
+  ) : (
+
+    <button
+      className="btn-finalizar btn-disabled"
+      disabled
+    >
+      Agregá un producto o escribinos
+    </button>
+
+  )
+}
+
 
     </div>
   );
