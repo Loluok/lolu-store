@@ -16,6 +16,9 @@ body {
   align-items: center;
 } 
 
+html {
+  scroll-behavior: smooth;
+}
 
 .info-bar {
   background: #f8dede;
@@ -24,6 +27,8 @@ body {
   padding: 10px;
   font-size: .95rem;
   font-weight: 500;
+  margin: 0;
+  width: 100%;
   animation: aparecer 0.5s ease;
 }
 .navbar {
@@ -34,9 +39,7 @@ body {
   background: #F4C7C3;
   font-size: 2rem;
   font-weight: 700;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  margin-bottom: 0;
 }
 
 .navbar h1{
@@ -61,6 +64,13 @@ body {
 .menu a:hover {
   color: #C78283;
 }
+
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 
 .hero {
   display: grid;
@@ -443,6 +453,13 @@ body {
   transform: scale(1.1);
 }
 
+.footer {
+  margin-top: 60px;
+  padding: 40px;
+  background: #F4C7C3;
+  text-align: center;
+  color: #7A5252;
+}
 
 @media (min-width: 768px) {
   .cards {

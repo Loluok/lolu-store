@@ -3,7 +3,8 @@ import { productos } from "./data/productos";
 import "./App.css";
 import ProductoCard from "./components/ProductoCard";
 import InfoBar from "./components/InfoBar";
-
+import Carrito from "./components/Carrito";
+import CategoriaCard from "./components/CategoriaCard";
 
 function App() {
 
@@ -82,6 +83,9 @@ const tieneObservacion =
   return (
     <div className="app">
 
+<div className="header-wrapper">
+
+
       <nav className="navbar">
 
         <h1>
@@ -89,9 +93,16 @@ const tieneObservacion =
 </h1>
 
         <div className="menu">
-  <a href="#">Inicio</a>
-  <a href="#">Catálogo</a>
-  <a href="#">Contacto</a>
+
+<a href="#">Inicio</a>
+
+<a href="#catalogo">
+  Catálogo
+</a>
+
+<a href="#contacto">
+  Contacto
+</a>
 
  <div
   className="cart"
@@ -226,6 +237,8 @@ const tieneObservacion =
   mensaje={mensajesInfo[mensajeActivo]}
 />
 
+</div>
+
       <section className="hero">
   <div className="hero-text">
     <h2>Detalles que cuentan historias ♡</h2>
@@ -246,54 +259,53 @@ const tieneObservacion =
   </div>
 </section>
 
-<section className="categorias">
-  <h3>Categorías</h3>
+<section
+  id="catalogo"
+  className="categorias"
+>
+  <h2>Categorías</h2>
 
   <div className="categorias-grid">
 
-    <div
-  className={`card ${
-    categoriaActiva === "parejas" ? "activa" : ""
-  }`}
-  onClick={() => setCategoriaActiva("parejas")}
->
-      <span>💝</span>
-      <span>Parejas</span>
-    </div>
-<div
-  className={`card ${
-    categoriaActiva === "sorpresas" ? "activa" : ""
-  }`}
-  onClick={() => setCategoriaActiva("sorpresas")}
->
-      <span>🎁</span>
-      <span>Sorpresas</span>
-    </div>
+ <CategoriaCard
+  emoji="💝"
+  texto="Parejas"
+  categoria="parejas"
+  categoriaActiva={categoriaActiva}
+  setCategoriaActiva={setCategoriaActiva}
+/>
 
-    <div
-  className={`card ${
-    categoriaActiva === "peluches" ? "activa" : ""
-  }`}
-  onClick={() => setCategoriaActiva("peluches")}
->
-      <span>🧸</span>
-      <span>Peluches</span>
-    </div>
+<CategoriaCard
+  emoji="🎁"
+  texto="Sorpresas"
+  categoria="sorpresas"
+  categoriaActiva={categoriaActiva}
+  setCategoriaActiva={setCategoriaActiva}
+/>
 
-    <div
-  className={`card ${
-    categoriaActiva === "ramos" ? "activa" : ""
-  }`}
-  onClick={() => setCategoriaActiva("ramos")}
->
-      <span>🌸</span>
-      <span>Ramos</span>
-    </div>
+<CategoriaCard
+  emoji="🧸"
+  texto="Peluches"
+  categoria="peluches"
+  categoriaActiva={categoriaActiva}
+  setCategoriaActiva={setCategoriaActiva}
+/>
+
+<CategoriaCard
+  emoji="🌸"
+  texto="Ramos"
+  categoria="ramos"
+  categoriaActiva={categoriaActiva}
+  setCategoriaActiva={setCategoriaActiva}
+/>
 
   </div>
 </section>
 
-      <section className="destacados">
+<section
+  className="destacados"
+>
+
   <h3>Productos Destacados</h3>
 
   <div className="cards">
@@ -314,6 +326,22 @@ const tieneObservacion =
   </div>
 
 </section>
+
+<footer id="contacto" className="footer">
+
+  <h3>LOLU ♡</h3>
+
+  <p>📍 Palermo, CABA</p>
+
+  <p>🚚 Envíos por Correo Argentino</p>
+
+  <p>📱 WhatsApp</p>
+
+  <p>💌 Instagram</p>
+
+</footer>
+
+
     </div>
   );
 }
