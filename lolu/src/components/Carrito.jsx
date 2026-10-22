@@ -51,13 +51,23 @@ function Carrito({
         alt={producto.nombre}
       />
 
-      <div className="item-info">
+   <div className="item-info">
 
-        <h4>{producto.nombre}</h4>
+  <h4>{producto.nombre}</h4>
 
-        <p>{producto.precio}</p>
+  <p>{producto.precio}</p>
 
-      </div>
+  <button
+    onClick={() =>
+      setCarrito(
+        carrito.filter((_, i) => i !== index)
+      )
+    }
+  >
+    🗑️ Eliminar
+  </button>
+
+</div>
 
     </div>
 

@@ -263,11 +263,19 @@ const tieneObservacion =
   <div className="footer-contacto">
     <h4>Contacto</h4>
 
-   <a href="https://wa.me/5491160328221">
+  <a
+  href="https://wa.me/5491160328221"
+  target="_blank"
+  rel="noreferrer"
+>
   📱 WhatsApp
 </a>
 
-  <a href="https://instagram.com/locommenge">
+<a
+  href="https://instagram.com/TUUSUARIO"
+  target="_blank"
+  rel="noreferrer"
+>
   💗 Instagram
 </a>
 
