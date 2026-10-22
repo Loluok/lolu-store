@@ -7,6 +7,8 @@ function Admin() {
 const [precio, setPrecio] = useState("");
 const [categoria, setCategoria] = useState("Parejas");
 const [productos, setProductos] = useState([]);
+const [editandoIndex, setEditandoIndex] = useState(null);
+const [imagen, setImagen] = useState("");
 
   return (
     <div className="admin">
@@ -41,6 +43,15 @@ const [productos, setProductos] = useState([]);
   }
 />
 
+<input
+  type="text"
+  placeholder=""https://..."
+  value={imagen}
+  onChange={(e) =>
+    setImagen(e.target.value)
+  }
+/>
+
        <select
   value={categoria}
   onChange={(e) => setCategoria(e.target.value)}
@@ -54,9 +65,11 @@ const [productos, setProductos] = useState([]);
         <button
   onClick={() => {
 
-    if (
+
+if (
   nombre.trim() === "" ||
-  precio.trim() === ""
+  precio.trim() === "" ||
+  imagen.trim() === ""
 ) {
   alert("Completá todos los campos 🌸");
   return;
@@ -69,29 +82,52 @@ if (Number(precio) <= 0) {
   return;
 }
 
-    const nuevoProducto = {
-      nombre,
-      precio,
-      categoria,
-    };
+const nuevoProducto = {
+  nombre,
+  precio,
+  categoria,
+  imagen,
+};
 
-    setProductos([
-      ...productos,
-      nuevoProducto
-    ]);
+if (editandoIndex !== null) {
+
+  const copia = [...productos];
+
+  copia[editandoIndex] = nuevoProducto;
+
+  setProductos(copia);
+
+  setEditandoIndex(null);
+
+} else {
+
+  setProductos([
+    ...productos,
+    nuevoProducto
+  ]);
+
+}
+
 
     setNombre("");
     setPrecio("");
+    setImagen("");
     setCategoria("Parejas");
   }}
 >
-  Guardar producto
+
+ {
+  editandoIndex !== null
+    ? "Actualizar producto"
+    : "Guardar producto"
+}
+
 </button>
 
       </div>
 
-      <h2 className="admin-subtitle">
-  Productos cargados
+<h2 className="admin-subtitle">
+  📦 Productos cargados
 </h2>
 
 {productos.length === 0 ? (
@@ -108,6 +144,12 @@ if (Number(precio) <= 0) {
       key={index}
       className="producto-admin"
     >
+        
+    <img
+  src={producto.imagen}
+  alt={producto.nombre}
+  className="preview-admin"
+/>
 
         <h3>
   {producto.nombre}
@@ -133,6 +175,25 @@ if (Number(precio) <= 0) {
   }
 >
   🗑️ Eliminar
+</button>
+
+<button
+  className="btn-editar"
+  onClick={() => {
+
+    setNombre(producto.nombre);
+
+    setPrecio(producto.precio);
+
+    setCategoria(producto.categoria);
+
+    setImagen(producto.imagen);
+
+    setEditandoIndex(index);
+
+  }}
+>
+  ✏️ Editar
 </button>
 
     </div>
